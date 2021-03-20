@@ -1,0 +1,18 @@
+Package: quarantine gs
+Title: quarantine gs
+Version: 0.0.1
+Authors@R: person("Roberto", "Salas", role = c("aut"))
+Description: Get paso a paso
+License: MIT
+Imports: 
+    httr,
+    rvest,
+    stringr,
+    jsonlite,
+    sf,
+    stringi,
+    tmap,
+    dplyr,
+    purrr
+Encoding: UTF-8
+LazyData: true
