@@ -26,7 +26,7 @@ gs <- st_read("https://raw.githubusercontent.com/robsalasco/precenso_2016_geojso
 
 data_sf <- inner_join(gs, data, by=c("NOM_COMUNA"="comuna"))
 
-data_sf %>% st_write("quarantine.geojson")
+data_sf %>% st_write("quarantine.geojson", delete_dsn = TRUE)
 
 tmap_mode("plot")
 
