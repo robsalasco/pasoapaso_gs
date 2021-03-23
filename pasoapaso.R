@@ -32,7 +32,7 @@ tmap_mode("plot")
 
 plot_q <- tm_shape(data_sf) + 
   tm_polygons(col="paso", 
-              title=paste("Plan Paso a Paso", format(Sys.Date(),"%d-%m-%Y")), 
+              title=paste0("Plan Paso a Paso Gran Santiago (", format(Sys.Date(),"%d-%m-%Y"),")"), 
               palette = "-Blues",  
               border.col = "black", 
               border.alpha = 0.5,
