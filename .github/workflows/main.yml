@@ -50,7 +50,7 @@ jobs:
         run: Rscript 'pasoapaso.R'
         
       - name: Commit results
-        if: github.repository == 'robsalasco/quarantine_gs'
+        if: github.repository == 'robsalasco/pasoapaso_gs'
         run: |
           git init
           git config user.name "Roberto Salas"
