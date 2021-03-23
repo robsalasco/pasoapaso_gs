@@ -17,9 +17,8 @@ paso <- read_html("https://e.infogram.com/81277d3a-5813-46f7-a270-79d1768a70b2")
   
 data <- matrix(paso$elements$content$content$entities$`3f026fbf-998f-4ae2-852b-94fa3a2f71d4`$props$chartData$data,
        nrow = 346) %>% 
-  as_tibble() %>% 
+  as_tibble(.name_repair = ~ c("comuna","paso","estado")) %>% 
   slice(-1) %>% 
-  set_names(c("comuna","paso","estado")) %>% 
   mutate(comuna = str_to_upper(comuna))
   
 gs <- st_read("https://raw.githubusercontent.com/robsalasco/precenso_2016_geojson_chile/master/Extras/GRAN_SANTIAGO.geojson")
