@@ -4,7 +4,7 @@ library(stringr)
 library(jsonlite)
 library(sf)
 library(stringi)
-library(tmap)
+library(mapsf)
 library(dplyr)
 library(purrr)
 
@@ -28,20 +28,24 @@ data_sf <- inner_join(gs, data, by=c("NOM_COMUNA"="comuna"))
 
 data_sf %>% st_write("quarantine.geojson", delete_dsn = TRUE)
 
-tmap_mode("plot")
+data_sf <- data_sf %>% st_transform(32719)
 
-plot_q <- tm_shape(data_sf) + 
-  tm_polygons(col="paso", 
-              title=paste0("Plan Paso a Paso Gran Santiago (", format(Sys.Date(),"%d-%m-%Y"),")"), 
-              palette = "-Blues",  
-              border.col = "black", 
-              border.alpha = 0.5,
-              lwd=1) + 
-  tm_text(text = "NOM_COMUNA", size = 0.3) +
-  tm_credits("Fuente: Ministerio de Salud; Gobierno de Chile (2021)", position=c("right", "bottom"), size=0.55) +
-  tm_layout(legend.width=1,
-            inner.margins = c(0.1, 0.1, 0.10, 0.1), 
-            frame=FALSE) +
-  tm_compass(type = "8star", position = c(.85, .80))
-
-tmap_save(plot_q, "quarantine.png", width=6, height = 6, units="in")
+mf_init(x = data_sf, theme = "dark", expandBB = c(.09,.09,.09,.2),
+        export = "png", filename = "quarantine.png", res = 300, width = 2000, height = 2000) 
+mf_shadow(data_sf, col = "grey30", add = TRUE)
+mf_map(x = data_sf, 
+       var = "paso",
+       type = "typo",
+       pal = "Sunset", 
+       leg_title = NULL, 
+       add = TRUE,
+       leg_pos = "topleft")
+mf_label(x = data_sf, var = "NOM_COMUNA", overlap=FALSE, cex = 0.35, halo = TRUE, col = "white", r = 0.05, bg = "grey40")
+mf_inset_on(x = "worldmap", pos = "right")
+mf_worldmap(data_sf, col = "black")
+mf_inset_off()
+mf_title(paste0("Plan Paso a Paso Gran Santiago (", format(Sys.Date(),"%d-%m-%Y"),")"))
+mf_credits("Ministerio de Salud, Gobierno de Chile (2021)", pos = "bottomright")
+mf_scale(pos = "bottomleft")
+mf_arrow('topright')
+dev.off()
