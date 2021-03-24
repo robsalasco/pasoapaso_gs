@@ -11,7 +11,7 @@ Imports:
     jsonlite,
     sf,
     stringi,
-    tmap,
+    mapsf,
     dplyr,
     purrr
 Encoding: UTF-8
