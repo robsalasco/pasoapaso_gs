@@ -30,7 +30,7 @@ data_sf %>% st_write("quarantine.geojson", delete_dsn = TRUE)
 
 data_sf <- data_sf %>% st_transform(32719)
 
-mf_init(x = data_sf, theme = "dark", expandBB = c(.09,.09,.09,.2),
+mf_export(x = data_sf, theme = "dark", expandBB = c(.09,.09,.09,.2),
         export = "png", filename = "quarantine.png", res = 300, width = 2000, height = 2000) 
 mf_shadow(data_sf, col = "grey30", add = TRUE)
 mf_map(x = data_sf, 
