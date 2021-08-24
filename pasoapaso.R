@@ -20,7 +20,7 @@ data <- matrix(paso$elements$content$content$entities$`3f026fbf-998f-4ae2-852b-9
   as_tibble(.name_repair = ~ c("comuna","paso","estado")) %>% 
   slice(-1) %>% 
   mutate(comuna = str_to_upper(comuna)) %>%
-  mutate(paso = factor(paso, levels=c(1,2,3,4), labels = c("Cuarentena","Transicion", "Preparación", "Apertura")))
+  mutate(paso = factor(paso))
   
 gs <- st_read("https://raw.githubusercontent.com/robsalasco/precenso_2016_geojson_chile/master/Extras/GRAN_SANTIAGO.geojson")
 
